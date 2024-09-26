@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#X#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "chaosawakens:ruby"
+    },
+    "X": {
+      "item": "chaosawakens:amethyst"
+    }
+  },
+  "result": {
+    "item": "blackoutsbackpacks:ruby_backpack_upgrade"
+  }
+}

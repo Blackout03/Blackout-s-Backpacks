@@ -4,7 +4,6 @@ import com.blackout.blackoutsbackpacks.registry.BBStats;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
@@ -17,7 +16,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.util.List;
 
-public class DiamondBackpackItem extends Item {
+public class DiamondBackpackItem extends BackpackItem {
 	public DiamondBackpackItem(Properties properties) {
 		super(properties);
 	}
@@ -29,10 +28,14 @@ public class DiamondBackpackItem extends Item {
 			CompoundNBT tag = new CompoundNBT();
 			//if it doesn't have a tag - make one to stop crashes
 			if (!playerIn.getItemInHand(handIn).hasTag()) {
-				tag.putInt("width", 9);
+				tag.putInt("width", 12);
 				tag.putInt("height", 4);
 
-				playerIn.getMainHandItem().setTag(tag);
+				playerIn.getItemInHand(handIn).setTag(tag);
+			}
+
+			if (tag.getInt("width") != 12) {
+				tag.putInt("width", 12);
 			}
 
 			if (tag.getInt("height") != 4) {
@@ -40,9 +43,9 @@ public class DiamondBackpackItem extends Item {
 			}
 
 			ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) playerIn;
-			NetworkHooks.openGui(serverPlayerEntity, new BackpackItemContainerProvider(handIn, playerIn.getMainHandItem(), 9, 4), (buf) -> buf.writeInt(handIn == Hand.MAIN_HAND ? 0 : 1));
+			NetworkHooks.openGui(serverPlayerEntity, new BackpackItemContainerProvider(handIn, playerIn.getItemInHand(handIn), 12, 4), (buf) -> buf.writeInt(handIn == Hand.MAIN_HAND ? 0 : 1));
 			serverPlayerEntity.closeContainer();
-			NetworkHooks.openGui(serverPlayerEntity, new BackpackItemContainerProvider(handIn, playerIn.getMainHandItem(), 9, 4), (buf) -> buf.writeInt(handIn == Hand.MAIN_HAND ? 0 : 1));
+			NetworkHooks.openGui(serverPlayerEntity, new BackpackItemContainerProvider(handIn, playerIn.getItemInHand(handIn), 12, 4), (buf) -> buf.writeInt(handIn == Hand.MAIN_HAND ? 0 : 1));
 			playerIn.awardStat(BBStats.OPEN_BACKPACK);
 		}
 
@@ -51,7 +54,7 @@ public class DiamondBackpackItem extends Item {
 
 	@Override
 	public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		int width = 9;
+		int width = 12;
 		int height = 4;
 
 		CompoundNBT tag = new CompoundNBT();
@@ -60,6 +63,10 @@ public class DiamondBackpackItem extends Item {
 			if (stack.getTag().contains("width")) {
 				width = stack.getTag().getInt("width");
 				height = stack.getTag().getInt("height");
+			}
+
+			if (tag.getInt("width") != 12) {
+				tag.putInt("width", 12);
 			}
 
 			if (tag.getInt("height") != 4) {

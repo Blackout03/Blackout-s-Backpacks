@@ -6,7 +6,6 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EnderChestInventory;
 import net.minecraft.inventory.container.ChestContainer;
 import net.minecraft.inventory.container.SimpleNamedContainerProvider;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -15,7 +14,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class EnderChestBackpackItem extends Item {
+public class EnderChestBackpackItem extends BackpackItem {
 	private static final ITextComponent CONTAINER_TITLE = new TranslationTextComponent("container.blackoutsbackpacks.ender_backpack");
 
 	public EnderChestBackpackItem(Properties properties) {
@@ -23,10 +22,10 @@ public class EnderChestBackpackItem extends Item {
 	}
 
 	@Override
-	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-		final ItemStack stack = player.getItemInHand(hand);
+	public ActionResult<ItemStack> use(World world, PlayerEntity player, Hand handIn) {
+		final ItemStack stack = player.getItemInHand(handIn);
 		if (!world.isClientSide && player instanceof ServerPlayerEntity) {
-			open((ServerPlayerEntity) player, hand == Hand.MAIN_HAND ? player.getMainHandItem().getCount() : -1);
+			open((ServerPlayerEntity) player, handIn == Hand.MAIN_HAND ? player.getItemInHand(handIn).getCount() : -1);
 		}
 		return ActionResult.success(stack);
 	}

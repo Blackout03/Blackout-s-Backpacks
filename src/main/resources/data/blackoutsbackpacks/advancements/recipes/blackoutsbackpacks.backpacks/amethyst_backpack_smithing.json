@@ -15,12 +15,12 @@
           ]
         },
         "criteria": {
-          "has_amethyst_block": {
+          "has_amethyst_backpack_upgrade": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
               "items": [
                 {
-                  "item": "chaosawakens:amethyst_block"
+                  "item": "blackoutsbackpacks:amethyst_backpack_upgrade"
                 }
               ]
             }
@@ -34,7 +34,7 @@
         },
         "requirements": [
           [
-            "has_amethyst_block",
+            "has_amethyst_backpack_upgrade",
             "has_the_recipe"
           ]
         ]

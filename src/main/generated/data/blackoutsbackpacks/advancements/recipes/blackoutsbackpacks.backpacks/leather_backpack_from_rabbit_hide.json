@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "blackoutsbackpacks:leather_backpack"
+      "blackoutsbackpacks:leather_backpack_from_rabbit_hide"
     ]
   },
   "criteria": {
-    "has_leather": {
+    "has_rabbit_hide": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:leather"
+            "item": "minecraft:rabbit_hide"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "blackoutsbackpacks:leather_backpack"
+        "recipe": "blackoutsbackpacks:leather_backpack_from_rabbit_hide"
       }
     }
   },
   "requirements": [
     [
-      "has_leather",
+      "has_rabbit_hide",
       "has_the_recipe"
     ]
   ]

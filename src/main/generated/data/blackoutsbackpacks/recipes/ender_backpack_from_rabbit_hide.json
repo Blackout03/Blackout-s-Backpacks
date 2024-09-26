@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "###",
+    " # ",
     "#X#",
-    "###"
+    " # "
   ],
   "key": {
     "#": {
-      "item": "minecraft:leather"
+      "item": "minecraft:rabbit_hide"
     },
     "X": {
-      "item": "minecraft:ender_chest"
+      "tag": "forge:chests/ender"
     }
   },
   "result": {

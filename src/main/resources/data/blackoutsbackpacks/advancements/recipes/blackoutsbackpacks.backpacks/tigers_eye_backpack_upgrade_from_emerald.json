@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "blackoutsbackpacks:tigers_eye_backpack_upgrade_from_emerald"
+    ]
+  },
+  "criteria": {
+    "has_tigers_eye": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "chaosawakens:tigers_eye"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "blackoutsbackpacks:tigers_eye_backpack_upgrade_from_emerald"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tigers_eye",
+      "has_the_recipe"
+    ]
+  ]
+}

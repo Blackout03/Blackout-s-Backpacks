@@ -15,12 +15,22 @@
   "item.blackoutsbackpacks.gold_backpack": "Gold Backpack",
   "item.blackoutsbackpacks.diamond_backpack": "Diamond Backpack",
   "item.blackoutsbackpacks.netherite_backpack": "Netherite Backpack",
+  "item.blackoutsbackpacks.emerald_backpack": "Emerald Backpack",
   "item.blackoutsbackpacks.ender_backpack": "Ender Backpack",
 
-  "item.blackoutsbackpacks.emerald_backpack": "Emerald Backpack",
+  "item.blackoutsbackpacks.iron_backpack_upgrade": "Iron Backpack Upgrade",
+  "item.blackoutsbackpacks.gold_backpack_upgrade": "Gold Backpack Upgrade",
+  "item.blackoutsbackpacks.diamond_backpack_upgrade": "Diamond Backpack Upgrade",
+  "item.blackoutsbackpacks.netherite_backpack_upgrade": "Netherite Backpack Upgrade",
+  "item.blackoutsbackpacks.emerald_backpack_upgrade": "Emerald Backpack Upgrade",
+
   "item.blackoutsbackpacks.tigers_eye_backpack": "Tiger's Eye Backpack",
   "item.blackoutsbackpacks.amethyst_backpack": "Amethyst Backpack",
   "item.blackoutsbackpacks.ruby_backpack": "Ruby Backpack",
+
+  "item.blackoutsbackpacks.tigers_eye_backpack_upgrade": "Tiger's Eye Backpack Upgrade",
+  "item.blackoutsbackpacks.amethyst_backpack_upgrade": "Amethyst Backpack Upgrade",
+  "item.blackoutsbackpacks.ruby_backpack_upgrade": "Ruby Backpack Upgrade",
 
   "container.blackoutsbackpacks.backpack": "Backpack",
   "container.blackoutsbackpacks.ender_backpack": "Ender Backpack",

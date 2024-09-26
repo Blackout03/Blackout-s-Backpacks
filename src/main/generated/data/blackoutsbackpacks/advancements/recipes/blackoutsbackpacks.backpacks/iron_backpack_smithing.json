@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_iron_block": {
+    "has_iron_backpack_upgrade": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:iron_block"
+            "item": "blackoutsbackpacks:iron_backpack_upgrade"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_iron_block",
+      "has_iron_backpack_upgrade",
       "has_the_recipe"
     ]
   ]

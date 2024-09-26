@@ -41,6 +41,10 @@ public class BackpackItemContainerProvider implements INamedContainerProvider {
 			inventoryHeight = tag.getInt("height");
 		}
 
+		if (tag.getInt("width") != width) {
+			tag.putInt("width", width);
+		}
+
 		if (tag.getInt("height") != height) {
 			tag.putInt("height", height);
 		}

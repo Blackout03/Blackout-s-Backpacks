@@ -7,7 +7,6 @@ import com.blackout.blackoutsbackpacks.registry.BBContainerTypes;
 import com.blackout.blackoutsbackpacks.registry.BBItems;
 import com.blackout.blackoutsbackpacks.registry.BBStats;
 import io.github.chaosawakens.ChaosAwakens;
-import io.github.chaosawakens.api.CAReflectionHelper;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -46,7 +45,7 @@ public class BlackoutsBackpacks {
 		if (ModList.get().isLoaded("chaosawakens")) {
 			LOGGER.debug(ChaosAwakens.MODNAME + " is installed. " + ChaosAwakens.MODNAME + " Compatibility is enabled!");
 			LOGGER.debug("Mod ID for " + ChaosAwakens.MODNAME + " is: " + ChaosAwakens.MODID);
-			LOGGER.debug(ChaosAwakens.MODNAME + " Version is: " + ChaosAwakens.VERSION);
+			LOGGER.debug(ChaosAwakens.MODNAME + " Version is: {}", ChaosAwakens.VERSION);
 		}
 
 		IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();

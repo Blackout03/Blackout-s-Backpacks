@@ -4,7 +4,7 @@
     "item": "blackoutsbackpacks:gold_backpack"
   },
   "addition": {
-    "item": "minecraft:diamond_block"
+    "item": "blackoutsbackpacks:diamond_backpack_upgrade"
   },
   "result": {
     "item": "blackoutsbackpacks:diamond_backpack"

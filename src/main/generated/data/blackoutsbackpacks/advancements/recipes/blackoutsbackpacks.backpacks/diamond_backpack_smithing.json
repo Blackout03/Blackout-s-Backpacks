@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_diamond_block": {
+    "has_diamond_backpack_upgrade": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:diamond_block"
+            "item": "blackoutsbackpacks:diamond_backpack_upgrade"
           }
         ]
       }
@@ -25,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_diamond_block",
+      "has_diamond_backpack_upgrade",
       "has_the_recipe"
     ]
   ]

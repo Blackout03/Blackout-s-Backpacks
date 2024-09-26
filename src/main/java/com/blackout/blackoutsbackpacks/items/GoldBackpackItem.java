@@ -4,7 +4,6 @@ import com.blackout.blackoutsbackpacks.registry.BBStats;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
@@ -17,7 +16,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import java.util.List;
 
-public class GoldBackpackItem extends Item {
+public class GoldBackpackItem extends BackpackItem {
 	public GoldBackpackItem(Properties properties) {
 		super(properties);
 	}
@@ -29,10 +28,14 @@ public class GoldBackpackItem extends Item {
 			CompoundNBT tag = new CompoundNBT();
 			//if it doesn't have a tag - make one to stop crashes
 			if (!playerIn.getItemInHand(handIn).hasTag()) {
-				tag.putInt("width", 9);
+				tag.putInt("width", 12);
 				tag.putInt("height", 3);
 
-				playerIn.getMainHandItem().setTag(tag);
+				playerIn.getItemInHand(handIn).setTag(tag);
+			}
+
+			if (tag.getInt("width") != 12) {
+				tag.putInt("width", 12);
 			}
 
 			if (tag.getInt("height") != 3) {
@@ -40,18 +43,18 @@ public class GoldBackpackItem extends Item {
 			}
 
 			ServerPlayerEntity serverPlayerEntity = (ServerPlayerEntity) playerIn;
-			NetworkHooks.openGui(serverPlayerEntity, new BackpackItemContainerProvider(handIn, playerIn.getMainHandItem(), 9, 3), (buf) -> buf.writeInt(handIn == Hand.MAIN_HAND ? 0 : 1));
+			NetworkHooks.openGui(serverPlayerEntity, new BackpackItemContainerProvider(handIn, playerIn.getItemInHand(handIn), 12, 3), (buf) -> buf.writeInt(handIn == Hand.MAIN_HAND ? 0 : 1));
 			serverPlayerEntity.closeContainer();
-			NetworkHooks.openGui(serverPlayerEntity, new BackpackItemContainerProvider(handIn, playerIn.getMainHandItem(), 9, 3), (buf) -> buf.writeInt(handIn == Hand.MAIN_HAND ? 0 : 1));
+			NetworkHooks.openGui(serverPlayerEntity, new BackpackItemContainerProvider(handIn, playerIn.getItemInHand(handIn), 12, 3), (buf) -> buf.writeInt(handIn == Hand.MAIN_HAND ? 0 : 1));
 			playerIn.awardStat(BBStats.OPEN_BACKPACK);
 		}
 
-		return ActionResult.pass(playerIn.getMainHandItem());
+		return ActionResult.pass(playerIn.getItemInHand(handIn));
 	}
 
 	@Override
 	public void appendHoverText(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		int width = 9;
+		int width = 12;
 		int height = 3;
 
 		CompoundNBT tag = new CompoundNBT();
@@ -60,6 +63,10 @@ public class GoldBackpackItem extends Item {
 			if (stack.getTag().contains("width")) {
 				width = stack.getTag().getInt("width");
 				height = stack.getTag().getInt("height");
+			}
+
+			if (tag.getInt("width") != 12) {
+				tag.putInt("width", 12);
 			}
 
 			if (tag.getInt("height") != 3) {

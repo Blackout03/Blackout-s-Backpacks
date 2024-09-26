@@ -2,7 +2,6 @@ package com.blackout.blackoutsbackpacks.data;
 
 import com.blackout.blackoutsbackpacks.BlackoutsBackpacks;
 import com.blackout.blackoutsbackpacks.registry.BBItems;
-import com.blackout.blackoutsbackpacks.registry.BBTags;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
@@ -50,11 +49,6 @@ public class BBTagProvider extends BlockTagsProvider {
 
 		@Override
 		protected void addTags() {
-			this.tag(BBTags.Items.BACKPACKS).add(BBItems.LEATHER_BACKPACK.get(), BBItems.IRON_BACKPACK.get(),
-					BBItems.GOLD_BACKPACK.get(), BBItems.DIAMOND_BACKPACK.get(), BBItems.NETHERITE_BACKPACK.get(),
-					BBItems.EMERALD_BACKPACK.get(), BBItems.TIGERS_EYE_BACKPACK.get(), BBItems.AMETHYST_BACKPACK.get(),
-					BBItems.RUBY_BACKPACK.get(), BBItems.ENDER_BACKPACK.get());
-
 			this.tag(ItemTags.PIGLIN_LOVED).add(BBItems.GOLD_BACKPACK.get());
 		}
 	}

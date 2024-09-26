@@ -4,7 +4,7 @@
     "item": "blackoutsbackpacks:leather_backpack"
   },
   "addition": {
-    "item": "minecraft:iron_block"
+    "item": "blackoutsbackpacks:iron_backpack_upgrade"
   },
   "result": {
     "item": "blackoutsbackpacks:iron_backpack"

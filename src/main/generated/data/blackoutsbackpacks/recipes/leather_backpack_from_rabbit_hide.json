@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "#X#",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:rabbit_hide"
+    },
+    "X": {
+      "tag": "forge:chests/wooden"
+    }
+  },
+  "result": {
+    "item": "blackoutsbackpacks:leather_backpack"
+  }
+}

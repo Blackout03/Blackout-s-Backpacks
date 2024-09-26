@@ -2,9 +2,7 @@ package com.blackout.blackoutsbackpacks.container;
 
 import com.blackout.blackoutsbackpacks.items.*;
 import com.blackout.blackoutsbackpacks.registry.BBContainerTypes;
-import com.blackout.blackoutsbackpacks.registry.BBTags;
 import com.blackout.blackoutsbackpacks.util.BBUtils;
-import io.github.chaosawakens.common.items.BigHammerItem;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.Container;
@@ -64,7 +62,7 @@ public class BBContainer extends Container {
 				addSlot(new SlotItemHandler(inventory, index, 8 + (x * 18), 17 + (y * 18)) {
 					@Override
 					public boolean mayPlace(ItemStack itemStack) {
-						return !(itemStack.getItem().is(BBTags.Items.BACKPACKS));
+						return !(itemStack.getItem() instanceof BackpackItem);
 					}
 				});
 			}
@@ -83,7 +81,7 @@ public class BBContainer extends Container {
 			ItemStack itemstack1 = slot.getItem();
 			itemstack = itemstack1.copy();
 
-			if (itemstack1.getItem().is(BBTags.Items.BACKPACKS)) return ItemStack.EMPTY;
+			if (itemstack1.getItem() instanceof BackpackItem) return ItemStack.EMPTY;
 
 			if (index >= 36) {
 				if (!this.moveItemStackTo(itemstack1, 0, 36, true)) {
@@ -121,18 +119,18 @@ public class BBContainer extends Container {
 			ItemStack backpack = playerInventory.player.getItemInHand(hand);
 
 			//default width
-			int inventoryWidth = 9;
+			int inventoryWidth = 12;
 			int inventoryHeight = 0;
 
-			if (playerInventory.getSelected().getItem() instanceof DyeableBackpackItem) inventoryHeight = 1;
-			else if (playerInventory.getSelected().getItem() instanceof IronBackpackItem) inventoryHeight = 2;
-			else if (playerInventory.getSelected().getItem() instanceof GoldBackpackItem) inventoryHeight = 3;
-			else if (playerInventory.getSelected().getItem() instanceof DiamondBackpackItem) inventoryHeight = 4;
-			else if (playerInventory.getSelected().getItem() instanceof NetheriteBackpackItem) inventoryHeight = 5;
-			else if (playerInventory.getSelected().getItem() instanceof EmeraldBackpackItem) inventoryHeight = 6;
-			else if (playerInventory.getSelected().getItem() instanceof TigersEyeBackpackItem) inventoryHeight = 7;
-			else if (playerInventory.getSelected().getItem() instanceof AmethystBackpackItem) inventoryHeight = 8;
-			else if (playerInventory.getSelected().getItem() instanceof RubyBackpackItem) inventoryHeight = 9;
+			if (backpack.getItem() instanceof DyeableBackpackItem) inventoryHeight = 1;
+			else if (backpack.getItem() instanceof IronBackpackItem) inventoryHeight = 2;
+			else if (backpack.getItem() instanceof GoldBackpackItem) inventoryHeight = 3;
+			else if (backpack.getItem() instanceof DiamondBackpackItem) inventoryHeight = 4;
+			else if (backpack.getItem() instanceof NetheriteBackpackItem) inventoryHeight = 5;
+			else if (backpack.getItem() instanceof EmeraldBackpackItem) inventoryHeight = 6;
+			else if (backpack.getItem() instanceof TigersEyeBackpackItem) inventoryHeight = 7;
+			else if (backpack.getItem() instanceof AmethystBackpackItem) inventoryHeight = 8;
+			else if (backpack.getItem() instanceof RubyBackpackItem) inventoryHeight = 9;
 			else inventoryWidth = 0;
 
 			//if no tag, make one now to stop crashes
@@ -159,15 +157,25 @@ public class BBContainer extends Container {
 				inventoryHandler = BBUtils.validateHandlerSize(inventoryHandler, inventoryWidth, inventoryHeight);
 			}
 
-			return new BackpackContainer(windowID, playerInventory, inventoryWidth, inventoryHeight, inventoryHandler, hand);
+			return backpack.getItem() instanceof BackpackItem ? new BackpackContainer(windowID, playerInventory, inventoryWidth, inventoryHeight, inventoryHandler, hand) : null;
 		}
 
 		@Override
 		public void removed(PlayerEntity playerIn) {
-			//save the data to the backpack
+			// save the data to the backpack
 			if (this.chestInventory instanceof ItemStackHandler) {
 				ItemStackHandler handler = (ItemStackHandler) this.chestInventory;
-				if (!playerIn.getItemInHand(hand).isEmpty()) Objects.requireNonNull(playerIn.getItemInHand(hand).getTag()).put("Inventory", handler.serializeNBT());
+
+				// check both hands for the backpack and save accordingly
+				ItemStack itemInMainHand = playerIn.getMainHandItem();
+				ItemStack itemInOffHand = playerIn.getOffhandItem();
+
+				// save the inventory for the appropriate hand
+				if (hand == Hand.MAIN_HAND && !itemInMainHand.isEmpty() && itemInMainHand.getItem() instanceof BackpackItem) {
+					Objects.requireNonNull(itemInMainHand.getTag()).put("Inventory", handler.serializeNBT());
+				} else if (hand == Hand.OFF_HAND && !itemInOffHand.isEmpty() && itemInOffHand.getItem() instanceof BackpackItem) {
+					Objects.requireNonNull(itemInOffHand.getTag()).put("Inventory", handler.serializeNBT());
+				}
 			}
 		}
 	}

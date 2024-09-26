@@ -15,12 +15,12 @@
           ]
         },
         "criteria": {
-          "has_tigers_eye_block": {
+          "has_tigers_eye_backpack_upgrade": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
               "items": [
                 {
-                  "item": "chaosawakens:tigers_eye_block"
+                  "item": "blackoutsbackpacks:tigers_eye_backpack_upgrade"
                 }
               ]
             }
@@ -34,7 +34,7 @@
         },
         "requirements": [
           [
-            "has_tigers_eye_block",
+            "has_tigers_eye_backpack_upgrade",
             "has_the_recipe"
           ]
         ]

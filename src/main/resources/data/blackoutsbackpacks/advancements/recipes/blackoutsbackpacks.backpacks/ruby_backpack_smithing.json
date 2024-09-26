@@ -15,12 +15,12 @@
           ]
         },
         "criteria": {
-          "has_ruby_block": {
+          "has_ruby_backpack_upgrade": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
               "items": [
                 {
-                  "item": "chaosawakens:ruby_block"
+                  "item": "blackoutsbackpacks:ruby_backpack_upgrade"
                 }
               ]
             }
@@ -34,7 +34,7 @@
         },
         "requirements": [
           [
-            "has_ruby_block",
+            "has_ruby_backpack_upgrade",
             "has_the_recipe"
           ]
         ]

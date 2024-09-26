@@ -17,31 +17,33 @@ public class BBRecipeProvider extends RecipeProvider {
 	}
 
 	@SuppressWarnings("ALL")
-	private static void surroundItem(Consumer<IFinishedRecipe> consumer, IItemProvider pOutput, IItemProvider pSurroundMaterial, IItemProvider pItemMaterial) {
+	private static void crossRecipeItem(Consumer<IFinishedRecipe> consumer, IItemProvider pOutput, IItemProvider pSurroundMaterial, IItemProvider pItemMaterial) {
 		ShapedRecipeBuilder.shaped(pOutput)
 				.define('#', pSurroundMaterial)
 				.define('X', pItemMaterial)
-				.pattern("###")
+				.pattern(" # ")
 				.pattern("#X#")
-				.pattern("###")
+				.pattern(" # ")
 				.unlockedBy("has_" + pSurroundMaterial.asItem(), has(pSurroundMaterial))
-				.save(consumer);
+				.save(consumer, "blackoutsbackpacks:" + pOutput + "_from_" + pItemMaterial);
 	}
 
 	@SuppressWarnings("ALL")
-	private static void surroundItem(Consumer<IFinishedRecipe> consumer, IItemProvider pOutput, IItemProvider pSurroundMaterial, Tags.IOptionalNamedTag pItemMaterial) {
+	private static void crossRecipeItem(Consumer<IFinishedRecipe> consumer, IItemProvider pOutput, IItemProvider pSurroundMaterial, Tags.IOptionalNamedTag pItemMaterial) {
 		ShapedRecipeBuilder.shaped(pOutput)
 				.define('#', pSurroundMaterial)
 				.define('X', pItemMaterial)
-				.pattern("###")
+				.pattern(" # ")
 				.pattern("#X#")
-				.pattern("###")
+				.pattern(" # ")
 				.unlockedBy("has_" + pSurroundMaterial.asItem(), has(pSurroundMaterial))
-				.save(consumer);
+				.save(consumer, "blackoutsbackpacks:" + pOutput + "_from_" + pSurroundMaterial);
 	}
 
-	private static void backpackSmithing(Consumer<IFinishedRecipe> consumer, Item output, Item input, Item ingredient) {
-		SmithingRecipeBuilder.smithing(Ingredient.of(input), Ingredient.of(ingredient), output).unlocks("has_" + ingredient, has(ingredient)).save(consumer, "blackoutsbackpacks:" + output + "_smithing");
+	private static void backpackSmithing(Consumer<IFinishedRecipe> consumer, Item pOutput, Item pInput, Item pIngredient) {
+		SmithingRecipeBuilder.smithing(Ingredient.of(pInput), Ingredient.of(pIngredient), pOutput)
+				.unlocks("has_" + pIngredient, has(pIngredient))
+				.save(consumer, "blackoutsbackpacks:" + pOutput + "_smithing");
 	}
 
 	public String getName() {
@@ -50,12 +52,22 @@ public class BBRecipeProvider extends RecipeProvider {
 
 	@Override
 	protected void buildShapelessRecipes(Consumer<IFinishedRecipe> consumer) {
-		surroundItem(consumer, BBItems.LEATHER_BACKPACK.get(), Items.LEATHER, Tags.Items.CHESTS_WOODEN);
-		surroundItem(consumer, BBItems.ENDER_BACKPACK.get(), Items.LEATHER, Items.ENDER_CHEST);
+		crossRecipeItem(consumer, BBItems.IRON_BACKPACK_UPGRADE.get(), Items.IRON_INGOT, Items.LEATHER);
+		crossRecipeItem(consumer, BBItems.IRON_BACKPACK_UPGRADE.get(), Items.IRON_INGOT, Items.RABBIT_HIDE);
+		crossRecipeItem(consumer, BBItems.GOLD_BACKPACK_UPGRADE.get(), Items.GOLD_INGOT, Items.IRON_INGOT);
+		crossRecipeItem(consumer, BBItems.DIAMOND_BACKPACK_UPGRADE.get(), Items.DIAMOND, Items.GOLD_INGOT);
+		crossRecipeItem(consumer, BBItems.NETHERITE_BACKPACK_UPGRADE.get(), Items.NETHERITE_SCRAP, Items.DIAMOND);
+		crossRecipeItem(consumer, BBItems.EMERALD_BACKPACK_UPGRADE.get(), Items.EMERALD, Items.NETHERITE_SCRAP);
 
-		backpackSmithing(consumer, BBItems.IRON_BACKPACK.get(), BBItems.LEATHER_BACKPACK.get(), Items.IRON_BLOCK);
-		backpackSmithing(consumer, BBItems.GOLD_BACKPACK.get(), BBItems.IRON_BACKPACK.get(), Items.GOLD_BLOCK);
-		backpackSmithing(consumer, BBItems.DIAMOND_BACKPACK.get(), BBItems.GOLD_BACKPACK.get(), Items.DIAMOND_BLOCK);
-		backpackSmithing(consumer, BBItems.NETHERITE_BACKPACK.get(), BBItems.DIAMOND_BACKPACK.get(), Items.NETHERITE_INGOT);
+		crossRecipeItem(consumer, BBItems.LEATHER_BACKPACK.get(), Items.LEATHER, Tags.Items.CHESTS_WOODEN);
+		crossRecipeItem(consumer, BBItems.LEATHER_BACKPACK.get(), Items.RABBIT_HIDE, Tags.Items.CHESTS_WOODEN);
+		crossRecipeItem(consumer, BBItems.ENDER_BACKPACK.get(), Items.LEATHER, Tags.Items.CHESTS_ENDER);
+		crossRecipeItem(consumer, BBItems.ENDER_BACKPACK.get(), Items.RABBIT_HIDE, Tags.Items.CHESTS_ENDER);
+
+		backpackSmithing(consumer, BBItems.IRON_BACKPACK.get(), BBItems.LEATHER_BACKPACK.get(), BBItems.IRON_BACKPACK_UPGRADE.get());
+		backpackSmithing(consumer, BBItems.GOLD_BACKPACK.get(), BBItems.IRON_BACKPACK.get(), BBItems.GOLD_BACKPACK_UPGRADE.get());
+		backpackSmithing(consumer, BBItems.DIAMOND_BACKPACK.get(), BBItems.GOLD_BACKPACK.get(), BBItems.DIAMOND_BACKPACK_UPGRADE.get());
+		backpackSmithing(consumer, BBItems.NETHERITE_BACKPACK.get(), BBItems.DIAMOND_BACKPACK.get(), BBItems.NETHERITE_BACKPACK_UPGRADE.get());
+		backpackSmithing(consumer, BBItems.EMERALD_BACKPACK.get(), BBItems.NETHERITE_BACKPACK.get(), BBItems.EMERALD_BACKPACK_UPGRADE.get());
 	}
 }
